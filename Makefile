@@ -1,15 +1,18 @@
 CC=clang
-CFLAGS=-g `llvm-config --cflags`
-LD=clang++
-LDFLAGS=`llvm-config --cxxflags --ldflags --libs core executionengine jit interpreter analysis native bitwriter --system-libs`
+# CFLAGS=-g `llvm-config --cflags`
+# LD=clang++
+# LDFLAGS=`llvm-config --cxxflags --ldflags --libs core executionengine jit interpreter analysis native bitwriter --system-libs`
 
 all: sum
 
-sum.o: sum.c
-	$(CC) $(CFLAGS) -c $<
+# sum.o: sum.c
+# 	$(CC) $(CFLAGS) -c $<
 
-sum: sum.o
-	$(LD) $< $(LDFLAGS) -o $@
+# sum: sum.o
+# 	$(LD) $< $(LDFLAGS) -o $@
+
+sum: sum.c
+	$(CC) /lib64/libLLVM.so $< -o $@
 
 sum.bc: sum
 	./sum 0 0

@@ -36,8 +36,11 @@ int main(int argc, char const *argv[]) {
 
     LLVMExecutionEngineRef engine;
     error = NULL;
-    LLVMLinkInJIT();
-    LLVMInitializeNativeTarget();
+    // LLVMLinkInJIT();
+    // LLVMInitializeNativeTarget();
+    // https://stackoverflow.com/a/38801376/16942208
+    LLVMInitializeNativeAsmPrinter();
+    LLVMInitializeNativeAsmParser();
     if (LLVMCreateExecutionEngineForModule(&engine, mod, &error) != 0) {
         fprintf(stderr, "failed to create execution engine\n");
         abort();
